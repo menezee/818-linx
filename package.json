@@ -1,0 +1,15 @@
+{
+  "name": "818-linx",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "presentation": "mdx-deck \"./classes/${npm_config_name}.mdx\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "mdx-deck": "^4.1.1"
+  }
+}
