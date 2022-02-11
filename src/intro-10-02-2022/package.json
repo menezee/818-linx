@@ -1,0 +1,14 @@
+{
+  "name": "intro-10-02-2022",
+  "version": "0.0.1",
+  "description": "Nosso primeiro pacote node.js",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Erich",
+  "license": "ISC",
+  "dependencies": {
+    "ascii-art": "^2.8.5"
+  }
+}
