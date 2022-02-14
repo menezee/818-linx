@@ -1,0 +1,14 @@
+{
+  "name": "linter-15-02-2022",
+  "version": "0.0.1",
+  "description": "Importancia do linter",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Erich",
+  "license": "ISC",
+  "devDependencies": {
+
+  }
+}
