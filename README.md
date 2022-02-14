@@ -13,7 +13,7 @@ npm run presentation --name=intro # name should be the mdx file name inside /cla
 ```
 
 ### Agenda
-1. [ ] Introdução / Instalação Node [[Aula](https://github.com/menezee/818-linx/blob/main/classes/intro.mdx) | Código]
+1. [x] Introdução / Instalação Node [[Aula](https://github.com/menezee/818-linx/blob/main/classes/intro.mdx) | Código]
 2. [ ] Importância / Configuração de Linter [[Aula]() | [Código]()]
 3. [ ] Programação Paralela vs Programação Assíncrona [[Aula]() | [Código]()]
 4. [ ] Programação Assíncrona (callback, promise, async/await) [[Aula]() | [Código]()]
