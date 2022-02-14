@@ -11,5 +11,8 @@
   "license": "ISC",
   "devDependencies": {
     "mdx-deck": "^4.1.1"
+  },
+  "dependencies": {
+    "figlet": "^1.5.2"
   }
 }
