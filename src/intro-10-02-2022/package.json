@@ -9,6 +9,6 @@
   "author": "Erich",
   "license": "ISC",
   "dependencies": {
-    "ascii-art": "^2.8.5"
+    "figlet": "^1.5.2"
   }
 }
