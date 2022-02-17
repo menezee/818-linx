@@ -4,11 +4,14 @@
   "description": "Importancia do linter",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "lint": "eslint ./index.js"
   },
   "author": "Erich",
   "license": "ISC",
   "devDependencies": {
-
+    "eslint": "^8.9.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4"
   }
 }
