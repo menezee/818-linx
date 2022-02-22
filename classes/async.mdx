@@ -1,0 +1,78 @@
+import {
+  CodeSurfer,
+  CodeSurferColumns,
+  Step,
+} from "code-surfer";
+import { github, vsDark } from "@code-surfer/themes";
+
+import { future } from '@mdx-deck/themes';
+export const theme = future;
+
+import { Block, Image } from './components';
+
+<Block>
+  <Block centralized>
+    <Image
+      src="https://i.ibb.co/9cFPyxm/js.png"
+      height={300}
+      width={300}
+    />
+  </Block>
+  <h2>Programação Assíncrona</h2>
+  <h3>callback, promise, async/await</h3>
+</Block>
+
+---
+
+# Agenda
+- Callbacks
+- Promises
+- Async/Await
+- Parallel
+
+---
+
+<CodeSurfer>
+
+```js title="Callbacks"
+fs
+  .readFile(
+    filePath,
+    'utf-8',
+    callback,
+  );
+```
+
+```js title="Callbacks"
+fs
+  .readFile(
+    filePath,
+    'utf-8',
+    function(err, data) {
+
+    },
+  );
+```
+
+```js title="Callbacks"
+fs
+  .readFile(
+    filePath,
+    'utf-8',
+    function(err, data) {
+      if (err) {
+        console.error(
+          'error reading file: ',
+          err.message,
+        );
+      }
+
+      console.log(
+        `data from ${filePath}:`,
+        data,
+      );
+    },
+  );
+```
+
+</CodeSurfer>
