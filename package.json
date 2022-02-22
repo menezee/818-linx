@@ -10,7 +10,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "mdx-deck": "^4.1.1"
+    "code-surfer": "^3.1.0",
+    "mdx-deck": "3.0.10"
   },
   "dependencies": {
     "figlet": "^1.5.2"
