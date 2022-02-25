@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "i": "^0.3.7",
+    "node-gtts": "^2.0.2",
     "nodemon": "^2.0.15",
     "npm": "^8.5.2"
   }
