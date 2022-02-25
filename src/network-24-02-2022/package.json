@@ -1,0 +1,17 @@
+{
+  "name": "boilerplate-17-02-2022",
+  "version": "0.0.1",
+  "description": "Network project",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "Erich",
+  "license": "ISC",
+  "dependencies": {
+    "i": "^0.3.7",
+    "nodemon": "^2.0.15",
+    "npm": "^8.5.2"
+  }
+}
