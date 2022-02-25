@@ -1,29 +1,61 @@
 const http = require('http');
+const fsPromise = require('fs').promises;
+const path = require('path');
 
 const server = http.createServer();
 
-server.on('request', (req, res) => {
+async function readTxtFiles(folderPath) {
+  if (folderPath === undefined) {
+    throw new Error('folderPath is undefined');
+  }
+
+  try {
+    const files = await fsPromise.readdir(folderPath);
+    const readPromises = files.map(file => {
+      const filePath = path.join(__dirname, file);
+      return fsPromise.readFile(filePath, 'utf-8');
+    });
+    return Promise.all(readPromises);
+  } catch (err) {
+    throw new Error('error reading files', err);
+  }
+}
+
+function createHTMLBody(items) {
+  return `
+    <div
+      style="width: 100vw;
+             height: 100vh;
+             display: flex;
+             justify-content: center;
+             align-items: center">
+      <h1></h1>
+      <ul>
+        ${items.map(item => (
+          `<li>${item}</li>`
+        ))}
+      </ul>
+    </div>
+  `;
+}
+
+server.on('request', async (req, res) => {
   const { method, url } = req;
 
-  if (method === 'GET' && url === '/html') {
+  const folderPath = path.join(__dirname, 'txt-files');
+  const filesContent = await readTxtFiles(folderPath);
+
+  if (url === '/html') {
     res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.end(`
-    <body>
-      <h1>Ola mundo</h1>
-      <ul>
-        <li>foo</li>
-        <li>baz</li>
-        <li>bar</li>
-      </ul>
-    </body>
-    `);
-  } else if (method === 'POST' && url === '/json') {
-    res.statusCode = 201; // created
-    res.setHeader('Content-Type', 'application/json');
-    const obj = { escola: 'let\'s code' };
-    const objAsStr = JSON.stringify(obj);
-    res.write(objAsStr);
-    res.end();
+    const HTMLContent = createHTMLBody(filesContent);
+    res.end(HTMLContent);
+
+  } else if (url === '/json') {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    const JSONContent = { cervejas: filesContent };
+    const JSONContentAsStr = JSON.stringify(JSONContent);
+    res.end(JSONContentAsStr);
+
   }
 });
 
