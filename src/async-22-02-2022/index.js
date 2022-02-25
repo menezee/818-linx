@@ -1,30 +1,30 @@
-function randomNumberBetween(min = 2000, max = 7000) {
-  return Math.floor(Math.random() * (max - min + 1) + min)
-}
+// function randomNumberBetween(min = 2000, max = 7000) {
+//   return Math.floor(Math.random() * (max - min + 1) + min)
+// }
 
 /*
 Criar função que que retorna uma Promise com um
 número aleatório após esperar x milisegundos
 (criar tempo de espera e número aleatório usando randomNumberBetween)
 */
-function randomNumberAsync() {
-  const tempoDeEspera = randomNumberBetween();
-  console.log(`vamos esperar ${tempoDeEspera} milisegundos!`);
+// function randomNumberAsync() {
+//   const tempoDeEspera = randomNumberBetween();
+//   console.log(`vamos esperar ${tempoDeEspera} milisegundos!`);
 
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      reject('passou do tempo!');
-    }, 4000);
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       reject('passou do tempo!');
+//     }, 4000);
 
-    setTimeout(() => {
-      const aleatorio = randomNumberBetween();
-      console.log('numero aleatorio gerado', aleatorio);
+//     setTimeout(() => {
+//       const aleatorio = randomNumberBetween();
+//       console.log('numero aleatorio gerado', aleatorio);
 
-      if (aleatorio < 5000) reject('numero mto baixo!');
-      else resolve(aleatorio);
-    }, tempoDeEspera);
-  });
-}
+//       if (aleatorio < 5000) reject('numero mto baixo!');
+//       else resolve(aleatorio);
+//     }, tempoDeEspera);
+//   });
+// }
 
 // chamar usando async
 // (async () => {
@@ -66,28 +66,28 @@ function randomNumberAsync() {
   //   console.log(`err: ${err}`);
   // });
 
-function randomNumber(callback) {
-  const tempoDeEspera = randomNumberBetween();
-  console.log(`vamos esperar ${tempoDeEspera} milisegundos!`);
+// function randomNumber(callback) {
+//   const tempoDeEspera = randomNumberBetween();
+//   console.log(`vamos esperar ${tempoDeEspera} milisegundos!`);
 
-  setTimeout(() => {
-    const aleatorio = randomNumberBetween();
-    console.log('numero aleatorio gerado', aleatorio);
+//   setTimeout(() => {
+//     const aleatorio = randomNumberBetween();
+//     console.log('numero aleatorio gerado', aleatorio);
 
-    if (aleatorio < 5000) {
-      callback(new Error('valor mto pequeno!'), null);
-    } else {
-      callback(null, aleatorio);
-    }
-  }, tempoDeEspera);
-}
+//     if (aleatorio < 5000) {
+//       callback(new Error('valor mto pequeno!'), null);
+//     } else {
+//       callback(null, aleatorio);
+//     }
+//   }, tempoDeEspera);
+// }
 
 // readFile(path, utf, function(err, data) {})
-function trataValorAleatorio(err, data) {
-  if (err !== null) {
-    console.log('deu problema rodando com callback', {err, data});
-  }
+// function trataValorAleatorio(err, data) {
+//   if (err !== null) {
+//     console.log('deu problema rodando com callback', {err, data});
+//   }
 
-  console.log('deu tudo certo no callback', {err, data});
-}
-randomNumber(trataValorAleatorio);
+//   console.log('deu tudo certo no callback', {err, data});
+// }
+// randomNumber(trataValorAleatorio);
