@@ -1,6 +1,7 @@
 const http = require('http');
 const fsPromise = require('fs').promises;
 const path = require('path');
+const gtts = require('node-gtts')('pt');
 
 const server = http.createServer();
 
@@ -12,7 +13,7 @@ async function readTxtFiles(folderPath) {
   try {
     const files = await fsPromise.readdir(folderPath);
     const readPromises = files.map(file => {
-      const filePath = path.join(__dirname, file);
+      const filePath = path.join(__dirname, 'txt-files', file);
       return fsPromise.readFile(filePath, 'utf-8');
     });
     return Promise.all(readPromises);
@@ -22,18 +23,20 @@ async function readTxtFiles(folderPath) {
 }
 
 function createHTMLBody(items) {
+  const liItems = (
+    items
+      .map((item) => (`<li>${item}</li>`))
+      .join('')
+  );
+
   return `
     <div
       style="width: 100vw;
              height: 100vh;
-             display: flex;
-             justify-content: center;
-             align-items: center">
-      <h1></h1>
+             text-align: center;">
+      <h1>Cervejas</h1>
       <ul>
-        ${items.map(item => (
-          `<li>${item}</li>`
-        ))}
+        ${liItems}
       </ul>
     </div>
   `;
@@ -56,6 +59,20 @@ server.on('request', async (req, res) => {
     const JSONContentAsStr = JSON.stringify(JSONContent);
     res.end(JSONContentAsStr);
 
+  } else if (url === '/audio') {
+    res.writeHead(200, { 'Content-Type': 'audio/mpeg' });
+    const contentsAsStr = `Nossas cervejas são ${filesContent.join(', e ')}`;
+    const readStream = gtts.stream(contentsAsStr);
+
+    readStream.pipe(res);
+    readStream.on('end', () => {
+      console.log('ended streaming audio to response!');
+      res.end();
+    });
+
+  } else {
+    res.statusCode = 404;
+    res.end('resource not found');
   }
 });
 
