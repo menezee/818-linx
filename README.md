@@ -19,7 +19,7 @@ npm run presentation --name=intro # name should be the mdx file name inside /cla
 4. [x] Programação Assíncrona (callback, promise, async/await) [[Aula]() | [Código]()]
 5. [x] Módulo IO [[Aula]() | [Código]()]
 6. [ ] Módulo Console [[Aula]() | [Código]()]
-7. [ ] Módulos de Rede (net, dns, http, https, http/2, querystring, url) [[Aula]() | [Código]()]
+7. [x] Módulos de Rede (net, dns, http, https, http/2, querystring, url) [[Aula]() | [Código]()]
 8. [ ] Módulo Crypto (hashs) [[Aula]() | [Código]()]
 9. [ ] .ENV [[Aula]() | [Código]()]
 10. [ ] Datas / Horários (luxon) [[Aula]() | [Código]()]
