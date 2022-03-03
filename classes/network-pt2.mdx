@@ -1,0 +1,362 @@
+import {
+  CodeSurfer,
+  CodeSurferColumns,
+  Step,
+} from "code-surfer";
+import { github, vsDark } from "@code-surfer/themes";
+
+import { future } from '@mdx-deck/themes';
+export const theme = future;
+
+import { Block, Image } from './components';
+
+# Network
+### Part 2
+
+---
+
+<CodeSurfer>
+
+```js title="http"
+const http = require('http');
+```
+
+```js title="http"
+const http = require('http');
+const server = http.createServer();
+```
+
+```js title="http"
+const http = require('http');
+const server = http.createServer();
+server.listen(8080);
+```
+
+```js title="http"
+const http = require('http');
+const server = http.createServer();
+server.on('request', callback);
+server.listen(8080);
+```
+
+```js title="http"
+const http = require('http');
+const server = http.createServer();
+server.on('request', (req, res) => {
+
+});
+server.listen(8080);
+```
+
+```
+POST /beer
+{
+  "name": "Weiss",
+  "abv": 4.7
+}
+```
+
+```js title="http"
+server.on('request', (req, res) => {
+  const body = req.body; // ?
+});
+```
+
+```js title="http"
+server.on('request', (req, res) => {
+  req.on('data', callback);
+});
+```
+
+```js title="http"
+server.on('request', (req, res) => {
+  const body = [];
+  req.on('data', callback);
+});
+```
+
+```js title="http"
+server.on('request', (req, res) => {
+  const body = [];
+  req.on('data', callback);
+  req.on('end', callback);
+});
+```
+
+```js title="http"
+  const body = [];
+  req.on('data', chunk => {
+    // chunk = <Buffer 42 72 61 68 6d 61>
+  });
+```
+
+```js title="http"
+  const body = [];
+  req.on('data', chunk => {
+    body.push(chunk);
+  });
+```
+
+```js title="http"
+  const body = [];
+  req.on('end', () => {
+    const bodyAsStr = (
+      Buffer
+        .concat(buffers)
+        .toString()
+    );
+  });
+```
+
+```js title="http"
+  const body = '';
+  req.on('data', chunk => {
+    // body += `${chunk}`;
+    // body += '' + chunk;
+    // body += String(chunk);
+    // body += chunk.toString();
+  });
+```
+
+```js title="http"
+server.on('request', (req, res) => {
+  const body = [];
+  req.on('data', chunk => {
+    body.push(chunk);
+  });
+  req.on('end', () => {
+    const bodyAsStr = (
+      Buffer
+        .concat(buffers)
+        .toString()
+    );
+  });
+});
+```
+
+</CodeSurfer>
+
+---
+
+<Block>
+  <h2>
+    E se a gente extraísse isso para uma função?
+  </h2>
+</Block>
+
+---
+
+<CodeSurfer>
+
+```js
+function getBody(req) {
+
+}
+```
+
+```js
+function getBody(req) {
+  const data = [];
+  // ...
+  req.on('end', () => {
+    return data;
+  });
+}
+```
+
+```js
+function getBody(req) {
+  return new Promise();
+}
+```
+
+```js
+function getBody(req) {
+  return new Promise((resolve, reject) => {
+
+  });
+}
+```
+
+```js
+function getBody(req) {
+  return new Promise((resolve, reject) => {
+    const body = [];
+    req.on('data', cb);
+    req.on('end', cb);
+  });
+}
+```
+
+```js
+// Onde a Promise é resolvida?
+function getBody(req) {
+  return new Promise((resolve, reject) => {
+    const body = [];
+    req.on('data', cb);
+    req.on('end', cb);
+  });
+}
+```
+
+```js
+function getBody(req) {
+  return new Promise((resolve, reject) => {
+    const body = [];
+    req.on('data', chunk => {
+      body.push(chunk);
+    });
+    req.on('end', () => {
+      const bodyAsStr = (
+        Buffer
+          .concat(buffers)
+          .toString()
+      );
+    });
+  });
+}
+```
+
+```js
+function getBody(req) {
+  return new Promise((resolve, reject) => {
+    const body = [];
+    req.on('data', chunk => {
+      body.push(chunk);
+    });
+    req.on('end', () => {
+      const bodyAsStr = (
+        Buffer
+          .concat(buffers)
+          .toString()
+      );
+      resolve(bodyAsStr);
+    });
+  });
+}
+```
+
+```js
+function getBody(req) {
+  return new Promise((resolve, reject) => {
+    const body = [];
+    req.on('data', chunk => {
+      body.push(chunk);
+    });
+    req.on('error', (err) => {
+      reject(err);
+    });
+    req.on('end', () => {
+      const bodyAsStr = (
+        Buffer
+          .concat(buffers)
+          .toString()
+      );
+      resolve(bodyAsStr);
+    });
+  });
+}
+```
+
+```js
+getBody(req)
+  .then(body => {
+    // body já está disponível
+  })
+```
+
+```js
+getBody(req)
+  .then(body => {
+    // body já está disponível
+  })
+  .catch(err => {
+    // tratar o erro
+  });
+```
+
+```js
+const body = await getBody(req);
+```
+
+```js
+try {
+  const body = await getBody(req);
+} catch(err) {
+  // tratar o erro
+}
+```
+
+```js
+(async () => {
+  try {
+    const body = await getBody(req);
+  } catch(err) {
+    // tratar o erro
+  }
+})();
+```
+
+```js
+server.on('request', async (req, res) => {
+  const body = await getBody(req);
+});
+```
+
+```js
+server.on('request', async (req, res) => {
+  if (req.method === 'POST') {
+    const body = await getBody(req);
+    // podemos usar o body para algo!
+  }
+});
+```
+
+```js
+server.on('request', async (req, res) => {
+  if (req.method === 'POST') {
+    const body = await getBody(req);
+    await fsPromise.writeFile(path, body);
+  }
+});
+```
+
+</CodeSurfer>
+
+---
+
+<Block>
+  <h1>Exercício</h1>
+  <ul>
+    <li>Receber o tipo de cerveja como body (pode ser text mesmo)</li>
+    <ul>
+      <li>Qual método HTTP que cria?</li>
+    </ul>
+    <li>Criar um novo arquivo com o conteúdo do body</li>
+    <li>Nome do arquivo deve ser criado usando um identificar unico</li>
+    <ul>
+      <li>Por exemplo, new Date().toISOString()</li>
+    </ul>
+    <li>Atualizar um arquivo, recebendo como query param o nome do arquivo, com um conteúdo novo</li>
+    <ul>
+      <li>Qual método HTTP que atualiza?</li>
+    </ul>
+  </ul>
+</Block>
+
+---
+
+<CodeSurfer>
+
+```js title="URL"
+const URL = require('url');
+```
+
+```js title="URL"
+const URL = require('url');
+
+// URL.parse
+// urlString: string, parseQueryString: boolean
+```
+
+</CodeSurfer>
