@@ -1,12 +1,19 @@
 const http = require('http');
 const beerRouter = require('./routes/beer-router');
+const { fetchPokemon } = require('./helpers');
+const URL = require('url');
 
 const server = http.createServer();
 
 server.on('request', async (req, res) => {
   const { method, url } = req;
+  const { query } = URL.parse(req.url, true);
 
-  if (url.startsWith('/beer')) {
+  if (url.startsWith('/poke')) {
+    const pokemonName = await fetchPokemon(query.id);
+    res.end(pokemonName);
+
+  } else if (url.startsWith('/beer')) {
     beerRouter(req, res);
 
   } else {
