@@ -1,0 +1,16 @@
+{
+  "name": "boilerplate-17-02-2022",
+  "version": "0.0.1",
+  "description": "Boilerplate project",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Erich",
+  "license": "ISC",
+  "dependencies": {
+    "aes256": "^1.1.0",
+    "dotenv": "^16.0.0",
+    "luxon": "^2.3.1"
+  }
+}
