@@ -1,0 +1,327 @@
+import {
+  CodeSurfer,
+  CodeSurferColumns,
+  Step,
+} from "code-surfer";
+import { github, vsDark } from "@code-surfer/themes";
+
+import { future } from '@mdx-deck/themes';
+export const theme = future;
+
+import { Block, Image } from './components';
+
+# Express
+# Axios
+
+---
+
+<CodeSurfer>
+
+```js title="express"
+const http = require('http');
+```
+
+```js title="express"
+const http = require('http');
+const server = http.createServer();
+```
+
+```js title="express"
+const http = require('http');
+const server = http.createServer();
+server.on('request', async (req, res) => {
+
+});
+```
+
+```js title="express"
+const http = require('http');
+const server = http.createServer();
+server.on('request', async (req, res) => {
+  const { method, url } = req;
+});
+```
+
+```js title="express"
+const http = require('http');
+const server = http.createServer();
+server.on('request', async (req, res) => {
+  const { method, url } = req;
+  if (url.startsWith('/poke') && method === 'GET') {
+    // do stuff
+  }
+});
+```
+
+```js title="express"
+const http = require('http');
+const server = http.createServer();
+server.on('request', async (req, res) => {
+  const { method, url } = req;
+  if (url.startsWith('/poke') && method === 'GET') {
+    // do stuff
+  }
+});
+server.listen(8080);
+```
+
+</CodeSurfer>
+
+---
+
+<Image height="80vh" width="50vw" src="https://media.giphy.com/media/h4Z6RfuQycdiM/giphy.gif" />
+
+---
+
+<CodeSurfer>
+
+```js title="express"
+const express = require('express');
+```
+
+```js title="express"
+const express = require('express');
+const app = express();
+```
+
+```js title="express"
+const express = require('express');
+const app = express();
+
+app.get('/beer', (req, res) => {
+  res.send('Hello World!')
+});
+```
+
+```js title="express"
+const express = require('express');
+const app = express();
+
+app.get('/beer', (req, res) => {
+  res.send('Hello World!')
+});
+
+app.listen(8080);
+```
+
+</CodeSurfer>
+
+---
+
+<Block><h2>E para ler o body no POST?</h2></Block>
+
+---
+
+<CodeSurfer>
+
+```js title="express"
+function getBodyWithPromise(req) {
+  return new Promise((resolve, reject) => {
+    const buffers = [];
+
+    req.on('data', chunk => {
+      buffers.push(chunk);
+    });
+    req.on('end', () => {
+      const data = Buffer.concat(buffers).toString();
+      resolve(data);
+    });
+    req.on('error', (e) => {
+      reject(e);
+    });
+  });
+}
+```
+
+</CodeSurfer>
+
+---
+
+<Image height="80vh" width="50vw" src="https://media.giphy.com/media/ji6zzUZwNIuLS/giphy.gif" />
+
+---
+
+<CodeSurfer>
+
+```js title="express"
+app.post('/', (req, res) => {
+
+});
+```
+
+```js title="express"
+app.post('/', (req, res) => {
+  const body = req.body;
+});
+```
+
+```js title="express"
+app.post('/', (req, res) => {
+  const body = req.body;
+
+  res.json({
+    received_at: new Date().toISOString(),
+    "message-from-body": body.message,
+  });
+});
+```
+
+```js title="express"
+POST /
+{ "message": "the cake is a lie!" }
+```
+
+```js title="express"
+{
+  "received_at": "2022-03-10T04:18:58.311Z",
+  "message-from-body": "the cake is a lie!"
+}
+```
+
+```js title="express"
+const express = require('express');
+```
+
+```js title="express"
+const express = require('express');
+const app = express();
+```
+
+```js title="express"
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+```
+
+```js title="express"
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
+
+app.post('/', (req, res) => {
+
+});
+```
+
+```js title="express"
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
+
+app.post('/', (req, res) => {
+  const body = req.body;
+
+  res.json({
+    received_at: new Date().toISOString(),
+    "message-from-body": body.message,
+  });
+});
+```
+
+```js title="express"
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
+
+app.post('/', (req, res) => {
+  const body = req.body;
+
+  res.json({
+    received_at: new Date().toISOString(),
+    "message-from-body": body.message,
+  });
+});
+
+app.listen(8080);
+```
+
+```js title="express"
+npm i express
+npm i body-parser
+npm i -D nodemon
+npm set-script dev "nodemon index.js"
+npm run dev
+```
+
+</CodeSurfer>
+
+---
+
+# Axios
+
+---
+
+<CodeSurfer>
+
+```js title="axios"
+npm i axios
+```
+
+```js title="axios"
+const axios = require('axios');
+```
+
+```js title="axios"
+const axios = require('axios');
+
+async function fetchPokemon() {
+
+}
+```
+
+```js title="axios"
+const axios = require('axios');
+
+async function fetchPokemon() {
+  const response = await axios.get('https://pokeapi.co/api/v2/pokemon/1');
+}
+```
+
+```js title="axios"
+const axios = require('axios');
+
+async function fetchPokemon() {
+  const { data } = await axios.get('https://pokeapi.co/api/v2/pokemon/1');
+}
+```
+
+```js title="axios"
+const axios = require('axios');
+
+async function fetchPokemon() {
+  const { data } = await axios.get('https://pokeapi.co/api/v2/pokemon/1');
+  console.log({
+    pokemonName: data.name,
+  });
+}
+```
+
+```js title="axios"
+const axios = require('axios');
+
+axios.post('/beer');
+```
+
+```js title="axios"
+const axios = require('axios');
+
+
+axios.post('/beer', {});
+```
+
+```js title="axios"
+const axios = require('axios');
+
+axios.post('/beer', {
+  name: 'Heineken',
+  abv: 5,
+});
+```
+
+</CodeSurfer>
